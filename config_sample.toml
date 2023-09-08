@@ -1,0 +1,7 @@
+[web_login_info]   # wikiのウェブサイトに入るための認証
+username = "aaa"
+password = "bbbb"
+
+[wiki_login_info]  # wiki本体のアカウント認証
+username = "ccc"
+password = "dddd"
