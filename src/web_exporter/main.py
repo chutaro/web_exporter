@@ -2,13 +2,20 @@ import requests
 from bs4 import BeautifulSoup
 import html2text
 import re
+import os
 import toml
 
-# TOMLファイルのパスを指定
-config_file = 'config.toml'
+# Pythonスクリプトのディレクトリを取得
+current_dir = os.path.dirname(__file__)
+
+# TOMLファイルの相対パス
+config_file_path = os.path.join(current_dir, 'config.toml')
+
+# output フォルダの相対パス
+output_path = os.path.join(current_dir, '../../output/')
 
 # TOMLファイルを読み込む
-config_data = toml.load(config_file)
+config_data = toml.load(config_file_path)
 
 base_url = "https://www.space.t.u-tokyo.ac.jp/"
 section_name = "wiki/procedure/"
@@ -64,5 +71,5 @@ for link in links:
     # markdown に変換して書き出し
     md = html2text.html2text(new_soup.prettify())
     md = md.replace("\n編集\n", "")
-    with open("output/"+file_name, 'w', encoding='utf-8') as file:
+    with open(output_path+file_name, 'w', encoding='utf-8') as file:
         file.write(md)
